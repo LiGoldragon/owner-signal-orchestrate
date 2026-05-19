@@ -14,6 +14,34 @@ This split is code-enforced now and filesystem-permission-enforced
 later: callers can compile against the ordinary contract without being
 able to express role creation or repository-index refresh orders.
 
+## MUST IMPLEMENT — signal architecture migration
+
+This contract is pending the signal architecture migration named in
+`primary/reports/designer/238-signal-architecture-redirection-contract-local-verbs.md`
+and implemented by
+`primary/reports/designer/239-signal-architecture-migration-plan.md`.
+The current owner requests still sit under public `SignalVerb` roots;
+that shape is temporary.
+
+Required refactor after `signal-frame` and the updated
+`signal_channel!` macro are available:
+
+- replace the `signal-core` dependency with `signal-frame`;
+- drop the `Mutate` / `Retract` prefixes from owner request variants;
+- expose contract-local operation roots in verb form;
+- keep owner-only authority on the owner socket;
+- move verb-to-Sema lowering into the `persona-orchestrate` runtime
+  executor.
+
+The expected owner operation roots are `Create`, `Retire`, and
+`Refresh`. The payloads remain nouns: role creation order, role
+retirement order, and repository-index refresh order. The lower Sema
+effects remain runtime work, not contract declarations.
+
+**Note to remover:** when the refactor lands, remove this section and
+add a `## Migration history — contract-local verbs (2026-05-XX)`
+paragraph noting the shape change.
+
 ## 1 · Contract Surface
 
 | Request | Signal verb | Meaning |
