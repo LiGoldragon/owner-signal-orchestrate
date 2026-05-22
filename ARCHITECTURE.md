@@ -46,6 +46,7 @@ class labels (Layer 3) for observation. See
 | `RoleRetired` | The daemon retired the role record. |
 | `RoleCreationRejected` | The create order was valid but conflicts with existing state. |
 | `RepositoryIndexRefreshed` | The local repository index was refreshed. |
+| `PartialApplied` | One or more downstream mutation legs succeeded while one or more sibling legs failed; orchestrate records the divergence instead of rolling back. |
 | `OwnerOrchestrateRequestUnimplemented` | The request is part of the owner vocabulary but not implemented by the current runtime. |
 
 ## 2 · Shared Nouns
@@ -56,6 +57,7 @@ This crate imports role and path nouns from
 - `RoleIdentifier`
 - `RoleName` compatibility alias
 - `HarnessKind`
+- `PartialApplied` and its downstream success/failure records
 - `WirePath`
 
 It does not duplicate ordinary claim, release, handoff, activity, or

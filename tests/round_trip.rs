@@ -1,11 +1,12 @@
 use owner_signal_persona_orchestrate::{
-    ChannelRequest, CreateRoleOrder, Frame, FrameBody, HarnessKind, LaneAuthority,
+    ApplicationFailure, ApplicationFailureReason, ApplicationSuccess, ChannelRequest,
+    CreateRoleOrder, DownstreamComponent, Frame, FrameBody, HarnessKind, LaneAuthority,
     LaneAuthorityChange, LaneAuthoritySet, LaneIdentifier, LaneRegistered, LaneRegistration,
     LaneRegistrationRequest, LaneRetired, OwnerOperationKind, OwnerOrchestrateReply,
     OwnerOrchestrateRequest, OwnerOrchestrateRequestUnimplemented,
-    OwnerOrchestrateUnimplementedReason, RefreshRepositoryIndexOrder, RepositoryIndexRefreshed,
-    RetireRoleOrder, Retirement, Role, RoleCreated, RoleCreationRejected,
-    RoleCreationRejectionReason, RoleIdentifier, RoleRetired, RoleToken, WirePath,
+    OwnerOrchestrateUnimplementedReason, PartialApplied, RefreshRepositoryIndexOrder,
+    RepositoryIndexRefreshed, RetireRoleOrder, Retirement, Role, RoleCreated, RoleCreationRejected,
+    RoleCreationRejectionReason, RoleIdentifier, RoleRetired, RoleToken, ScopeReason, WirePath,
 };
 use signal_frame::{
     ExchangeIdentifier, ExchangeLane, LaneSequence, NonEmpty, Reply, RequestPayload, SessionEpoch,
@@ -156,6 +157,19 @@ fn owner_orchestrate_replies_round_trip() {
         authority: LaneAuthority::Support,
     });
     assert_eq!(round_trip_reply(authority_set.clone()), authority_set);
+
+    let partial = OwnerOrchestrateReply::PartialApplied(PartialApplied {
+        succeeded: vec![ApplicationSuccess {
+            component: DownstreamComponent::Router,
+            detail: ScopeReason::from_text("channel 42 installed").expect("success detail"),
+        }],
+        failed: vec![ApplicationFailure {
+            component: DownstreamComponent::Harness,
+            reason: ApplicationFailureReason::Unreachable,
+            detail: ScopeReason::from_text("codex-7 transcript is gone").expect("failure detail"),
+        }],
+    });
+    assert_eq!(round_trip_reply(partial.clone()), partial);
 
     let unimplemented = OwnerOrchestrateReply::OwnerOrchestrateRequestUnimplemented(
         OwnerOrchestrateRequestUnimplemented {

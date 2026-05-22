@@ -9,8 +9,9 @@ use nota_codec::{Decoder, Encoder, NotaDecode, NotaEncode, NotaEnum, NotaRecord}
 use rkyv::{Archive, Deserialize as RkyvDeserialize, Serialize as RkyvSerialize};
 use signal_frame::signal_channel;
 pub use signal_persona_orchestrate::{
-    HarnessKind, LaneAuthority, LaneIdentifier, LaneRegistration, Role, RoleIdentifier, RoleName,
-    RoleToken, WirePath,
+    ApplicationFailure, ApplicationFailureReason, ApplicationSuccess, DownstreamComponent,
+    HarnessKind, LaneAuthority, LaneIdentifier, LaneRegistration, PartialApplied, Role,
+    RoleIdentifier, RoleName, RoleToken, ScopeReason, WirePath,
 };
 
 #[derive(Archive, RkyvSerialize, RkyvDeserialize, NotaRecord, Debug, Clone, PartialEq, Eq)]
@@ -167,6 +168,7 @@ signal_channel! {
         LaneRegistered(LaneRegistered),
         LaneRetired(LaneRetired),
         LaneAuthoritySet(LaneAuthoritySet),
+        PartialApplied(PartialApplied),
         OwnerOrchestrateRequestUnimplemented(OwnerOrchestrateRequestUnimplemented),
     }
 }
