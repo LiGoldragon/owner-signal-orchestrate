@@ -1,14 +1,14 @@
-# owner-signal-persona-orchestrate — architecture
+# owner-signal-orchestrate — architecture
 
-*OwnerSignal contract for privileged `persona-orchestrate` role and
+*OwnerSignal contract for privileged `orchestrate` role and
 repository administration.*
 
 ## 0 · TL;DR
 
-`owner-signal-persona-orchestrate` is the owner-only Signal surface for
+`owner-signal-orchestrate` is the owner-only Signal surface for
 mutating orchestration topology. Ordinary role claims, releases,
 handoffs, observations, and activity records stay in
-`signal-persona-orchestrate`.
+`signal-orchestrate`.
 
 This split is code-enforced now and filesystem-permission-enforced
 later: callers can compile against the ordinary contract without being
@@ -26,7 +26,7 @@ The public owner request surface is now:
 - `Refresh(RefreshRepositoryIndexOrder)`
 
 There is no public `Mutate` / `Retract` tag in this contract. The
-owner socket remains the authority boundary; `persona-orchestrate`
+owner socket remains the authority boundary; `orchestrate`
 owns the typed Component Commands (Layer 2) that lower contract
 operations to executable form, and projects them to payloadless Sema
 class labels (Layer 3) for observation. See
@@ -52,7 +52,7 @@ class labels (Layer 3) for observation. See
 ## 2 · Shared Nouns
 
 This crate imports role and path nouns from
-`signal-persona-orchestrate`:
+`signal-orchestrate`:
 
 - `RoleIdentifier`
 - `RoleName` compatibility alias
@@ -67,14 +67,14 @@ scope records.
 
 | Constraint | Witness |
 |---|---|
-| Topology-changing orders live only in the owner contract. | Ordinary `signal-persona-orchestrate::OrchestrateRequest` has no `CreateRoleOrder`, `RetireRoleOrder`, or `RefreshRepositoryIndexOrder` variants; this crate round-trips all owner variants. |
+| Topology-changing orders live only in the owner contract. | Ordinary `signal-orchestrate::OrchestrateRequest` has no `CreateRoleOrder`, `RetireRoleOrder`, or `RefreshRepositoryIndexOrder` variants; this crate round-trips all owner variants. |
 | Every owner request has a contract-local operation root. | `OwnerOrchestrateRequest::operation_kind()` witnesses `Create`, `Retire`, and `Refresh`. |
 | Contract code contains no runtime. | Source contains no Kameo, Tokio, sema-engine, redb, filesystem mutation, GitHub, or ghq implementation. |
 | Harness assignment is typed, not hidden in a role string. | `CreateRoleOrder` carries `HarnessKind` beside `RoleIdentifier`. |
 
 ## 4 · Non-Ownership
 
-- No `persona-orchestrate` daemon.
+- No `orchestrate` daemon.
 - No role registry table.
 - No claim table.
 - No report repository creation.
@@ -91,8 +91,8 @@ tests/round_trip.rs   frame round trips and contract-local operation witnesses
 
 ## See Also
 
-- `../signal-persona-orchestrate/ARCHITECTURE.md`
-- `../persona-orchestrate/ARCHITECTURE.md`
+- `../signal-orchestrate/ARCHITECTURE.md`
+- `../orchestrate/ARCHITECTURE.md`
 - `../signal-frame/ARCHITECTURE.md`
 - `../signal-sema/ARCHITECTURE.md`
 - `~/primary/skills/contract-repo.md`

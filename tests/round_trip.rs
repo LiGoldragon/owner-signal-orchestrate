@@ -1,4 +1,4 @@
-use owner_signal_persona_orchestrate::{
+use owner_signal_orchestrate::{
     ApplicationFailure, ApplicationFailureReason, ApplicationSuccess, ChannelRequest,
     CreateRoleOrder, DownstreamComponent, Frame, FrameBody, HarnessKind, LaneAuthority,
     LaneAuthorityChange, LaneAuthoritySet, LaneIdentifier, LaneRegistered, LaneRegistration,

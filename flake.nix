@@ -1,5 +1,5 @@
 {
-  description = "owner-signal-persona-orchestrate - OwnerSignal contract for persona-orchestrate administration";
+  description = "owner-signal-orchestrate - OwnerSignal contract for orchestrate administration";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -71,7 +71,7 @@
           );
         };
         devShells.default = pkgs.mkShell {
-          name = "owner-signal-persona-orchestrate";
+          name = "owner-signal-orchestrate";
           packages = [
             pkgs.jujutsu
             pkgs.pkg-config

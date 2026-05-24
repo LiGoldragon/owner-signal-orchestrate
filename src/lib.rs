@@ -1,14 +1,14 @@
-//! OwnerSignal contract for privileged `persona-orchestrate`
+//! OwnerSignal contract for privileged `orchestrate`
 //! administration.
 //!
 //! Ordinary claim/release/handoff/activity traffic lives in
-//! `signal-persona-orchestrate`. This crate carries owner-only
+//! `signal-orchestrate`. This crate carries owner-only
 //! orders that mutate the orchestration substrate itself.
 
 use nota_codec::{Decoder, Encoder, NotaDecode, NotaEncode, NotaEnum, NotaRecord};
 use rkyv::{Archive, Deserialize as RkyvDeserialize, Serialize as RkyvSerialize};
 use signal_frame::signal_channel;
-pub use signal_persona_orchestrate::{
+pub use signal_orchestrate::{
     ApplicationFailure, ApplicationFailureReason, ApplicationSuccess, DownstreamComponent,
     HarnessKind, LaneAuthority, LaneIdentifier, LaneRegistration, PartialApplied, Role,
     RoleIdentifier, RoleName, RoleToken, ScopeReason, WirePath,

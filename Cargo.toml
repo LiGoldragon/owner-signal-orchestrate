@@ -1,20 +1,20 @@
 [package]
-name         = "owner-signal-persona-orchestrate"
+name         = "owner-signal-orchestrate"
 version      = "0.1.0"
 edition      = "2024"
 rust-version = "1.85"
 license      = "MIT OR Apache-2.0"
-repository   = "https://github.com/LiGoldragon/owner-signal-persona-orchestrate"
-description  = "OwnerSignal contract for privileged persona-orchestrate role and repository administration."
+repository   = "https://github.com/LiGoldragon/owner-signal-orchestrate"
+description  = "OwnerSignal contract for privileged orchestrate role and repository administration."
 publish      = false
 
 [lib]
-name = "owner_signal_persona_orchestrate"
+name = "owner_signal_orchestrate"
 path = "src/lib.rs"
 
 [dependencies]
 signal-frame                = { git = "https://github.com/LiGoldragon/signal-frame.git", branch = "main" }
-signal-persona-orchestrate = { git = "https://github.com/LiGoldragon/signal-persona-orchestrate.git", branch = "main" }
+signal-orchestrate = { git = "https://github.com/LiGoldragon/signal-orchestrate.git", branch = "main" }
 nota-codec                  = { git = "https://github.com/LiGoldragon/nota-codec.git", branch = "main" }
 rkyv                        = { version = "0.8", default-features = false, features = ["std", "bytecheck", "little_endian", "pointer_width_32", "unaligned"] }
 thiserror                   = "2"
