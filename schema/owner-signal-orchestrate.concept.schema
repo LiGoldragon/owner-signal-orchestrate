@@ -1,0 +1,35 @@
+{}
+
+[]
+
+[
+  (Create [Role])
+  (Retire [Role])
+  (Refresh [RepositoryIndex])
+  (Register [Lane])
+  (SetAuthority [Lane])
+]
+
+[]
+
+{
+  Create [(Role Role)]
+  Retire [(Role Role)]
+  Refresh [(RepositoryIndex RepositoryIndex)]
+  Register [(Lane Lane)]
+  SetAuthority [(Lane Lane)]
+  Role (Name)
+  Activity (Text)
+  RepositoryIndex (Text)
+  Lane (Name)
+  Text (String)
+  Identifier (u64)
+  Name (String)
+  Path (String)
+  Status [Concept Active Retired]
+}
+
+[
+  (Version 0 1)
+  (Status Concept)
+]
